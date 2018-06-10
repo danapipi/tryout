@@ -1,35 +1,25 @@
-$('.minus-btn').on('click', function(e) {
-    e.preventDefault();
-    var $this = $(this);
-    var $input = $this.closest('div').find('input');
-    var value = parseInt($input.val());
+jQuery(function () {
+    CartJS.init({
 
-    if (value > 1) {
-        value = value - 1;
-    } else {
-        value = 0;
-    }
+        cart | json
 
-$input.val(value);
-
+    }, {
+        "dataAPI": true,
+        "requestBodyClass": "loading"
+    });
 });
 
-$('.plus-btn').on('click', function(e) {
-    e.preventDefault();
-    var $this = $(this);
-    var $input = $this.closest('div').find('input');
-    var value = parseInt($input.val());
-
-    if (value < 100) {
-      value = value + 1;
-    } else {
-        value =100;
-    }
-
-    $input.val(value);
+$(function () {
+    CartJS.init({
+        cart | json
+    }, {
+        "moneyFormat": "{{ shop.money_format }}",
+        "moneyWithCurrencyFormat": "{{ shop.money_with_currency_format }}"
+    });
 });
 
-$('.like-btn').on('click', function() {
-$(this).toggleClass('is-active');
-});
 
+$('#button').click(function() {
+    CartJS.addItem(716986707, 1, {
+        "added_by": "Cart.js");
+});

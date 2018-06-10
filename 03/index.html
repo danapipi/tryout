@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/0.4.1/cart.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/0.4.1/rivets-cart.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
+    <script src="cart.min.js"></script>
+    <script src="rivets-cart.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
         crossorigin="anonymous">
 
@@ -30,15 +30,15 @@
                 <div class="col-md-4">
                     <form data-cart-submit="data-cart-submit">
                         <div class="form-group">
-                            <label for="demo-advanced-id">Select a Product</label>
-                            <select id="demo-advanced-id" name="id" class="form-control input-sm">
-                                <option value="716986707">Coat</option>
-                                <option value="716934999">Hat</option>
+                            <label for="id">Select a Product</label>
+                            <select id="id" name="id" class="form-control input-sm">
+                                <option value="716986707" id="716986707">Shirt</option>
+                                <option value="716934999">Shoes</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="demo-advanced-quantity">Choose a Quantity</label>
-                            <select id="demo-advanced-quantity" name="quantity" class="form-control input-sm">
+                            <label for="quantity">Choose a Quantity</label>
+                            <select id="quantity" name="quantity" class="form-control input-sm">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -46,14 +46,9 @@
                                 <option>5</option>
                             </select>
                         </div>
+
                         <div class="form-group">
-                            <label for="demo-advanced-custom-label">Add a Custom Label
-                                <small class="text-muted">(Optional)</small>
-                            </label>
-                            <input type="text" name="properties[Custom Label]" class="form-control input-sm">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-default" data-cart-add="12345678" data-cart-quantity="1">Add to Cart</button>
+                            <button type="submit" class="btn btn-default" data-cart-add="716986707" data-cart-quantity="1" id="button">Add to Cart</button>
                         </div>
                     </form>
                 </div>
@@ -71,30 +66,31 @@
                             <!-- rivets: each-item -->
                             <tr>
                                 <td>
-                                    <strong rv-text="item.title">Coat</strong>
+                                    <strong rv-text="item.title">Shirt</strong>
                                     <ul rv-hide="item.propertyArray | empty" class="list-unstyled" style="display: none;">
                                         <!-- rivets: each-property -->
                                     </ul>
                                 </td>
-                                <td rv-html="item.price | money Currency.currentCurrency" class="text-center">€19.99</td>
+                                <td rv-html="item.price | money Currency.currentCurrency" class="text-center">$29.99</td>
                                 <td class="text-center">
-                                    <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1" data-cart-quantity="2" data-cart-update="1">&nbsp;-&nbsp;</a>
+                                    <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1" data-cart-quantity="1" data-cart-update="1"
+                                        data-cart-add="716986707">&nbsp;-&nbsp;</a>
                                     <span rv-text="item.quantity">3</span>
-                                    <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1" data-cart-update="1" data-cart-quantity="4">&nbsp;+&nbsp;</a>
+                                    <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1" data-cart-update="1" data-cart-quantity="1">&nbsp;+&nbsp;</a>
                                 </td>
                                 <td class="text-center">
                                     <a href="#" rv-data-cart-remove="index | plus 1" class="close" data-cart-remove="1">×</a>
                                 </td>
-                                <td rv-html="item.line_price | money Currency.currentCurrency" class="text-right">€59.97</td>
+                                <td rv-html="item.line_price | money Currency.currentCurrency" class="text-right">$59.99</td>
                             </tr>
                             <tr>
                                 <td>
-                                    <strong rv-text="item.title">Hat</strong>
+                                    <strong rv-text="item.title">Shoes</strong>
                                     <ul rv-hide="item.propertyArray | empty" class="list-unstyled" style="display: none;">
                                         <!-- rivets: each-property -->
                                     </ul>
                                 </td>
-                                <td rv-html="item.price | money Currency.currentCurrency" class="text-center">€9.99</td>
+                                <td rv-html="item.price | money Currency.currentCurrency" class="text-center">$69.99</td>
                                 <td class="text-center">
                                     <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1" data-cart-quantity="4" data-cart-update="2">&nbsp;-&nbsp;</a>
                                     <span rv-text="item.quantity">5</span>
@@ -103,7 +99,7 @@
                                 <td class="text-center">
                                     <a href="#" rv-data-cart-remove="index | plus 1" class="close" data-cart-remove="2">×</a>
                                 </td>
-                                <td rv-html="item.line_price | money Currency.currentCurrency" class="text-right">€49.95</td>
+                                <td rv-html="item.line_price | money Currency.currentCurrency" class="text-right">$149.95</td>
                             </tr>
                             <tr rv-show="cart.item_count | lt 1" style="display: none;">
                                 <td colspan="5" class="text-center">You don't have any items in your cart.</td>
@@ -117,7 +113,7 @@
                         </tfoot>
                     </table>
                     <p class="text-center">
-                        <img src="loader.gif" width="16" height="11" class="cart-visible-loading">
+
                     </p>
                 </div>
             </div>
@@ -125,18 +121,8 @@
 
 
     </section>
-    <script src="03.js">
-        jQuery(function () {
-            CartJS.init({
-                {
-                    cart | json
-                }
-            }, {
-                "dataAPI": false,
-                "requestBodyClass": "loading"
-            });
-        });
-    </script>
+   
+    <script scr="03.js"></script>
 </body>
 
 </html>
