@@ -5,50 +5,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/0.4.1/cart.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/shopify-cartjs/0.4.1/rivets-cart.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+
     <title>Try Out 3 JS</title>
 </head>
 
 <body>
     <header>
-        <h1>Cart JS 03</h1>
+        <h1 class="text-center">Cart JS 03</h1>
     </header>
     <section>
-        <!-- Product #1 -->
-        <div class="item">
-            <div class="buttons">
-                <span class="delete-btn"></span>
-                <span class="like-btn"></span>
-            </div>
+        <div class="container">
 
-            <div class="image">
-                <img src="mac.jpg" alt="" />
+            <div class="row">
+                <div class="col-md-4">
+                    <form data-cart-submit="data-cart-submit">
+                        <div class="form-group">
+                            <label for="demo-advanced-id">Select a Product</label>
+                            <select id="demo-advanced-id" name="id" class="form-control input-sm">
+                                <option value="716986707">Coat</option>
+                                <option value="716934999">Hat</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-advanced-quantity">Choose a Quantity</label>
+                            <select id="demo-advanced-quantity" name="quantity" class="form-control input-sm">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="demo-advanced-custom-label">Add a Custom Label
+                                <small class="text-muted">(Optional)</small>
+                            </label>
+                            <input type="text" name="properties[Custom Label]" class="form-control input-sm">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default" data-cart-add="12345678" data-cart-quantity="1">Add to Cart</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-8">
+                    <table data-cart-view="data-cart-view" class="table table-bordered table-condensed table-striped table-vertical-middle">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th class="text-center">Price</th>
+                                <th colspan="2" class="text-center">Qty</th>
+                                <th class="text-right">Line Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- rivets: each-item -->
+                            <tr>
+                                <td>
+                                    <strong rv-text="item.title">Coat</strong>
+                                    <ul rv-hide="item.propertyArray | empty" class="list-unstyled" style="display: none;">
+                                        <!-- rivets: each-property -->
+                                    </ul>
+                                </td>
+                                <td rv-html="item.price | money Currency.currentCurrency" class="text-center">€19.99</td>
+                                <td class="text-center">
+                                    <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1" data-cart-quantity="2" data-cart-update="1">&nbsp;-&nbsp;</a>
+                                    <span rv-text="item.quantity">3</span>
+                                    <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1" data-cart-update="1" data-cart-quantity="4">&nbsp;+&nbsp;</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" rv-data-cart-remove="index | plus 1" class="close" data-cart-remove="1">×</a>
+                                </td>
+                                <td rv-html="item.line_price | money Currency.currentCurrency" class="text-right">€59.97</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong rv-text="item.title">Hat</strong>
+                                    <ul rv-hide="item.propertyArray | empty" class="list-unstyled" style="display: none;">
+                                        <!-- rivets: each-property -->
+                                    </ul>
+                                </td>
+                                <td rv-html="item.price | money Currency.currentCurrency" class="text-center">€9.99</td>
+                                <td class="text-center">
+                                    <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | minus 1" data-cart-quantity="4" data-cart-update="2">&nbsp;-&nbsp;</a>
+                                    <span rv-text="item.quantity">5</span>
+                                    <a href="#" rv-data-cart-update="index | plus 1" rv-data-cart-quantity="item.quantity | plus 1" data-cart-update="2" data-cart-quantity="6">&nbsp;+&nbsp;</a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="#" rv-data-cart-remove="index | plus 1" class="close" data-cart-remove="2">×</a>
+                                </td>
+                                <td rv-html="item.line_price | money Currency.currentCurrency" class="text-right">€49.95</td>
+                            </tr>
+                            <tr rv-show="cart.item_count | lt 1" style="display: none;">
+                                <td colspan="5" class="text-center">You don't have any items in your cart.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot rv-show="cart.item_count | gt 0">
+                            <tr>
+                                <td colspan="4" rv-html="cart.total_weight | weight_with_unit" class="text-muted small">14.0kg</td>
+                                <td rv-html="cart.total_price | money Currency.currentCurrency" class="text-right">€109.92</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <p class="text-center">
+                        <img src="loader.gif" width="16" height="11" class="cart-visible-loading">
+                    </p>
+                </div>
             </div>
-
-            <div class="description">
-                <span>Macbook Air</span>
-                <span>Silver</span>
-                <span>mac-slv</span>
-            </div>
-
-            <div class="quantity">
-                <button class="minus-btn" type="button" name="button">
-                    <img src="minus.svg" alt="" />
-                </button>
-                <input class="value" type="text" name="name" value="1">
-                <button class="plus-btn" type="button" name="button">
-                    <img src="plus.svg" alt="" />
-                </button>
-            </div>
-
-            <div class="total-price">$1549</div>
         </div>
 
+
     </section>
-    <script src="03.js"></script>
+    <script src="03.js">
+        jQuery(function () {
+            CartJS.init({
+                {
+                    cart | json
+                }
+            }, {
+                "dataAPI": false,
+                "requestBodyClass": "loading"
+            });
+        });
+    </script>
 </body>
 
 </html>
